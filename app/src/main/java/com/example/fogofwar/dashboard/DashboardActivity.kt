@@ -9,6 +9,7 @@ import com.example.fogofwar.R
 import com.example.fogofwar.app.CustomApp
 import com.example.fogofwar.login.LoginActivity
 import com.example.fogofwar.stockList.ListActivity
+import com.example.fogofwar.utils.setVisibility
 
 class DashboardActivity : Activity(), DashboardContract.View {
     private lateinit var presenter: DashboardPresenter
@@ -17,8 +18,9 @@ class DashboardActivity : Activity(), DashboardContract.View {
         super.onCreate(bundle)
         setContentView(R.layout.activity_dashboard)
         val presenter = DashboardPresenter(this, application as CustomApp)
+        val app = application as CustomApp
 
-        findViewById<Button>(R.id.btnViewList).setOnClickListener {
+        findViewById<Button>(R.id.buttonViewList).setOnClickListener {
             val intent = Intent(this, ListActivity::class.java)
             startActivity(intent)
         }
@@ -27,7 +29,8 @@ class DashboardActivity : Activity(), DashboardContract.View {
         presenter.loadUser()
         presenter.loadMarketData()
 
-        findViewById<Button>(R.id.btnLogout).setOnClickListener {
+        findViewById<Button>(R.id.buttonLogout).setOnClickListener {
+
             val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
@@ -40,6 +43,8 @@ class DashboardActivity : Activity(), DashboardContract.View {
         val textviewUser = findViewById<TextView>(R.id.textviewUser)
         textviewUser.text = "Welcome, $name"
     }
+
+
 
     override fun displayStockData(data: String) {
         val textviewStockData = findViewById<TextView>(R.id.textviewStockData)

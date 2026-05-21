@@ -17,20 +17,20 @@ class LoginActivity : Activity(), LoginContract.View {
         super.onCreate(bundle)
         setContentView(R.layout.activity_login)
 
-        val presenter = LoginPresenter(this, application as CustomApp)
+        val presenter = LoginPresenter(this, LoginModel(application as CustomApp))
 
 
         val buttonLogin = findViewById<Button>(R.id.buttonLogin)
-        val tvRegisterLink = findViewById<TextView>(R.id.tvRegisterLink)
+        val textviewRegisterLink = findViewById<TextView>(R.id.textviewRegisterLink)
 
         buttonLogin.setOnClickListener {
-            presenter.doLogin(
+            presenter.processLogin(
                 getEdittextVal(R.id.edittextUsername),
                 getEdittextVal(R.id.edittextPassword)
             )
         }
 
-        tvRegisterLink.setOnClickListener {
+        textviewRegisterLink.setOnClickListener {
             presenter.onRegisterClicked()
         }
     }

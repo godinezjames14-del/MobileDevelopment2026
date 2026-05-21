@@ -16,7 +16,7 @@ class RegisterActivity : Activity(), RegisterContract.View {
         super.onCreate(bundle)
         setContentView(R.layout.activity_register)
 
-        val presenter = RegisterPresenter(this, application as CustomApp)
+        val presenter = RegisterPresenter(this, RegisterModel(application as CustomApp))
         val buttonRegister = findViewById<Button>(R.id.buttonRegister)
 
         buttonRegister.setOnClickListener {

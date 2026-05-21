@@ -11,7 +11,11 @@ interface LoginContract {
     }
 
     interface Presenter {
-        fun doLogin(user: String, pass: String)
+        fun processLogin(user: String, pass: String)
         fun onRegisterClicked()
+    }
+
+    interface Model {
+        fun doLogin(user: String, pass: String): Boolean
     }
 }

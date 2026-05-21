@@ -4,17 +4,17 @@ import com.example.fogofwar.app.CustomApp
 
 class LoginPresenter(
     private var view: LoginContract.View?,
-    val app: CustomApp
+    val model:LoginModel
 
 ) : LoginContract.Presenter {
 
-    override fun doLogin(user: String, pass: String) {
+    override fun processLogin(user: String, pass: String) {
         if (user.trim().isEmpty() || pass.trim().isEmpty()) {
             view?.showErrorMessage("Please fill in all fields")
             return
         }
 
-        if (user == app.user && pass == app.pass) {
+        if (model.doLogin(user, pass)) {
             view?.showLoginSuccess()
             view?.navigateToDashboard()
         } else {
@@ -23,7 +23,6 @@ class LoginPresenter(
     }
 
     override fun onRegisterClicked() {
-        // The Brain tells the Face to move screens
         view?.navigateToRegister()
     }
 }

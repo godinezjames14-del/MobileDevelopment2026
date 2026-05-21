@@ -1,67 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#2C1B1B"
-    android:padding="24dp"
-    android:gravity="center_horizontal">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fog Of War Dashboard"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+    android:background="#FDFBF7"
+    android:padding="24dp">
 
     <TextView
         android:id="@+id/textviewUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="Welcome User"
-        android:textColor="#E0C097"
-        android:textSize="18sp" />
+        android:text="Welcome back, User"
+        android:textColor="#8B0000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp" />
 
-    <TextView
-        android:id="@+id/textviewStockData"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="#3E2A2A"
-        android:padding="16dp"
-        android:textColor="#E0C097"
-        android:textSize="18sp" />
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        app:strokeColor="#B8860B"
+        app:strokeWidth="1dp">
 
-    <TextView
-        android:id="@+id/textviewAIPreview"
+        <TextView
+            android:id="@+id/textviewStockData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Market Overview: Loading..."
+            android:textColor="#333333"
+            android:textSize="16sp" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="#3E2A2A"
-        android:padding="16dp"
-        android:textColor="#4CAF50"
+        android:layout_marginBottom="32dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="#F8F0E5"
+        app:strokeColor="#4CAF50"
+        app:strokeWidth="1dp">
+
+        <TextView
+            android:id="@+id/textviewAIPreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="AI Insight: Market appears stable today."
+            android:textColor="#2E7D32"
+            android:textSize="14sp"
+            android:textStyle="italic" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <Button
+        android:id="@+id/buttonViewList"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:backgroundTint="#8B0000"
+        android:text="VIEW STOCK LIST"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"
-        android:textStyle="italic" />
-
-    <!-- Navigation Buttons -->
-    <Button
-        android:id="@+id/btnViewList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="#E0C097"
-        android:text="View Stock List"
-        android:textColor="#2C1B1B" />
+        android:textStyle="bold" />
 
     <Button
-        android:id="@+id/btnLogout"
+        android:id="@+id/buttonLogout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="#3E2A2A"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#FDFBF7"
         android:text="Logout"
-        android:textColor="#FFFFFF" />
+        android:textColor="#8B0000"
+        app:strokeColor="#8B0000"
+        app:strokeWidth="1dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
 </LinearLayout>

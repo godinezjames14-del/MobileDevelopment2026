@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.*
 import com.example.fogofwar.R
 import com.example.fogofwar.app.CustomApp
+import com.example.fogofwar.utils.setVisibility
 
 class ListActivity : Activity(), ListContract.View {
     private lateinit var presenter: ListPresenter
@@ -19,6 +20,7 @@ class ListActivity : Activity(), ListContract.View {
         val btnAddAsset = findViewById<Button>(R.id.btnAddAsset)
 
         presenter = ListPresenter(this, application as CustomApp)
+        presenter.loadButton()
 
         btnAddAsset.setOnClickListener {
             presenter.onAddItemClicked()
@@ -41,4 +43,12 @@ class ListActivity : Activity(), ListContract.View {
         val intent = Intent(this, AddListActivity::class.java)
         startActivity(intent)
     }
+
+    override fun configureButton(flag: Boolean) {
+        android.util.Log.d("DEBUG_VISIBILITY", "Flag value is: $flag")
+        val btnAddAsset = findViewById<Button>(R.id.btnAddAsset)
+        btnAddAsset.setVisibility(flag)
+    }
+
+
 }

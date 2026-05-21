@@ -5,11 +5,13 @@ interface DashboardContract {
         fun displayStockData(data: String)
         fun showAIPrediction(prediction: String)
         fun displayWelcomeMessage(name: String)
+
     }
 
     interface Presenter {
         fun loadMarketData()
         fun loadUser()
         fun onRefreshClicked()
+
     }
 }

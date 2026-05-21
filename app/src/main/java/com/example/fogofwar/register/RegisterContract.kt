@@ -8,4 +8,8 @@ interface RegisterContract {
     interface Presenter {
         fun doRegister(fName: String, lName: String, email: String, pass: String, confirm: String)
     }
+
+    interface Model {
+        fun createAccount(fName: String, lName: String, email: String, pass: String)
+    }
 }

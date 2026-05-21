@@ -17,12 +17,15 @@ class DashboardPresenter(
     }
 
     override fun loadUser() {
-        val displayName = app.user
+        val displayName = app.currentUser
         view?.displayWelcomeMessage(displayName)
     }
 
     override fun onRefreshClicked() {
         loadMarketData()
     }
+
+
+
 
 }

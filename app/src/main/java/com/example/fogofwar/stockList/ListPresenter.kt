@@ -15,5 +15,10 @@ class ListPresenter(
         view.navigateToAddItem()
     }
 
+    override fun loadButton() {
+        view.configureButton(app.isAdmin)
+
+    }
+
 
 }

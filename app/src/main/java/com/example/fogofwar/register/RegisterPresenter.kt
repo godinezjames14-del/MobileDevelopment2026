@@ -4,7 +4,7 @@ import com.example.fogofwar.app.CustomApp
 
 class RegisterPresenter(
     private var view: RegisterContract.View?,
-    val app: CustomApp
+    val model: RegisterModel
 
 ) : RegisterContract.Presenter {
 
@@ -31,7 +31,8 @@ class RegisterPresenter(
             return
         }
 
-        app.newUser(email, pass)
+
+        model.createAccount(firstName, lastName, email, pass)
         view?.navigateToLogin()
     }
 
