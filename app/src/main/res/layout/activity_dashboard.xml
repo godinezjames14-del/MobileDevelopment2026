@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#2C1B1B"
+    android:padding="24dp"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fog Of War Dashboard"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textviewUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Welcome User"
+        android:textColor="#E0C097"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textviewStockData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#3E2A2A"
+        android:padding="16dp"
+        android:textColor="#E0C097"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textviewAIPreview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#3E2A2A"
+        android:padding="16dp"
+        android:textColor="#4CAF50"
+        android:textSize="16sp"
+        android:textStyle="italic" />
+
+    <!-- Navigation Buttons -->
+    <Button
+        android:id="@+id/btnViewList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#E0C097"
+        android:text="View Stock List"
+        android:textColor="#2C1B1B" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#3E2A2A"
+        android:text="Logout"
+        android:textColor="#FFFFFF" />
+
+</LinearLayout>

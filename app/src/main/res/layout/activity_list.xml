@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#2C1B1B"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Market Watchlist"
+        android:textColor="#E0C097"
+        android:textSize="22sp"
+        android:layout_marginBottom="16dp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/stockListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="#3E2A2A"
+        android:dividerHeight="1dp" />
+
+    <Button
+        android:id="@+id/btnAddAsset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#E0C097"
+        android:text="Add New Asset"
+        android:textColor="#2C1B1B" />
+
+</LinearLayout>
