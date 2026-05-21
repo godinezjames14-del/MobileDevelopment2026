@@ -1,13 +1,13 @@
 [versions]
 agp = "8.3.2"
-kotlin = "1.9.0"
-coreKtx = "1.9.1"
+kotlin = "1.9.22"       # Updated from 1.9.0
+coreKtx = "1.12.0"      # Updated from 1.9.1 (this fixes the 'Could not find' error)
 junit = "4.13.2"
-junitVersion = "1.3.0"
-espressoCore = "3.7.0"
-appcompat = "1.7.1"
-material = "1.13.0"
-activity = "1.8.0"
+junitVersion = "1.1.5"  # Updated from 1.3.0
+espressoCore = "3.5.1"  # Updated from 3.7.0 (3.7.0 is very new and can be unstable)
+appcompat = "1.7.0"     # Updated from 1.7.1 (stable version)
+material = "1.12.0"     # Updated from 1.13.0
+activity = "1.9.0"      # Updated from 1.8.0
 constraintlayout = "2.2.1"
 
 [libraries]
