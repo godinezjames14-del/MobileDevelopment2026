@@ -10,7 +10,7 @@ public class CustomApp: Application() {
     var balanceList = arrayListOf<Int>(1000, 100);
     var firstNameList  = arrayListOf<String>("Henry", "User");
     var lastNameList  = arrayListOf<String>("Godinez", "Name");
-    var stockList = mutableListOf("Bitcoin (BTC)", "Ethereum (ETH)", "Solana (SOL)")
+    var stockList = mutableListOf("Bitcoin (BTC)", "Ethereum (ETH)", "Solana (SOL)", "Tralalelo (Tr)", "Kiritych (KTr)")
 
     var currentUser = "";
     var currentBalance = 0;
