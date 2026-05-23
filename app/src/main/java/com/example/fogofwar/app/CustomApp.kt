@@ -7,13 +7,11 @@ public class CustomApp: Application() {
 
     var userList = arrayListOf<String>("admin", "user");
     var passList = arrayListOf<String>("123", "123");
-    var balanceList = arrayListOf<Int>(1000, 100);
     var firstNameList  = arrayListOf<String>("Henry", "User");
     var lastNameList  = arrayListOf<String>("Godinez", "Name");
     var stockList = mutableListOf("Bitcoin (BTC)", "Ethereum (ETH)", "Solana (SOL)", "Tralalelo (Tr)", "Kiritych (KTr)", "Tesla (T)", "Biohazard (BIO)")
 
     var currentUser = "";
-    var currentBalance = 0;
     var isAdmin = false;
 
     // Parsed & cached stock data — populated once on app start
@@ -29,20 +27,14 @@ public class CustomApp: Application() {
         passList.add(pass)
         firstNameList.add(firstName)
         lastNameList.add(lastName)
-        balanceList.add(0)
     }
 
     fun loadUser(index: Int){
         isAdmin = (index == 0)
         currentUser = firstNameList.get(index)
-        currentBalance = balanceList.get(index)
     }
 
-    fun clearUserData(){
-        currentUser = "";
-        currentBalance = 0;
-        isAdmin = false;
-    }
+
 
     /** Refresh parsedStocks — call after adding/removing from stockList */
     fun refreshParsedStocks() {

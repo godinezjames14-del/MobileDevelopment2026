@@ -25,6 +25,7 @@ class DashboardActivity : Activity(), DashboardContract.View {
         topStocksContainer = findViewById(R.id.topStocksContainer)
 
         val model = DashboardModel(application as CustomApp)
+        val app = application as CustomApp
         presenter = DashboardPresenter(this, model)
 
         presenter.loadUser()
@@ -66,14 +67,12 @@ class DashboardActivity : Activity(), DashboardContract.View {
             val color = if (stock.isPositive) Color.parseColor("#2E7D32")
                         else Color.parseColor("#C62828")
 
-            // Row container
             val row = LinearLayout(this).apply {
                 orientation = LinearLayout.HORIZONTAL
                 gravity = Gravity.CENTER_VERTICAL
                 setPadding(0, 12, 0, 12)
             }
 
-            // Medal + symbol
             val labelView = TextView(this).apply {
                 text = "$medal  ${stock.symbol}"
                 textSize = 15f
@@ -81,7 +80,6 @@ class DashboardActivity : Activity(), DashboardContract.View {
                 layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
             }
 
-            // Name
             val nameView = TextView(this).apply {
                 text = stock.name
                 textSize = 13f
@@ -89,7 +87,6 @@ class DashboardActivity : Activity(), DashboardContract.View {
                 layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.5f)
             }
 
-            // Change %
             val changeView = TextView(this).apply {
                 text = stock.formattedChange
                 textSize = 13f
@@ -103,7 +100,7 @@ class DashboardActivity : Activity(), DashboardContract.View {
             row.addView(changeView)
             topStocksContainer.addView(row)
 
-            // Divider (skip after last)
+
             if (index < stocks.size - 1) {
                 val divider = android.view.View(this).apply {
                     setBackgroundColor(Color.parseColor("#E0E0E0"))

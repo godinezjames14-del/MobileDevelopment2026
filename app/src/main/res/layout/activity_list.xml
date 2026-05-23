@@ -139,7 +139,7 @@
             android:layout_gravity="center_horizontal"/>
 
         <Button
-            android:id="@+id/btnAddAsset"
+            android:id="@+id/buttonAddAsset"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:backgroundTint="@color/accent_red"

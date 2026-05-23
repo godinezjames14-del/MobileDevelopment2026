@@ -21,7 +21,7 @@ class ListActivity : Activity(), ListContract.View {
     private lateinit var adapter: StockAdapter
     private lateinit var tvEmptyState: TextView
     private lateinit var searchBar: EditText
-    private lateinit var btnAddAsset: Button
+    private lateinit var buttonAddAsset: Button
     private lateinit var llBottomAction: LinearLayout
     private lateinit var spinnerSort: Spinner
 
@@ -32,7 +32,7 @@ class ListActivity : Activity(), ListContract.View {
         recyclerView  = findViewById(R.id.stockRecyclerView)
         tvEmptyState  = findViewById(R.id.tvEmptyState)
         searchBar     = findViewById(R.id.searchBar)
-        btnAddAsset   = findViewById(R.id.btnAddAsset)
+        buttonAddAsset   = findViewById(R.id.buttonAddAsset)
         llBottomAction = findViewById(R.id.llBottomAction)
         spinnerSort   = findViewById(R.id.spinnerSort)
 
@@ -45,7 +45,7 @@ class ListActivity : Activity(), ListContract.View {
         presenter.loadButton()
         presenter.loadItems()
 
-        btnAddAsset.setOnClickListener {
+        buttonAddAsset.setOnClickListener {
             presenter.onAddItemClicked()
         }
     }
@@ -55,7 +55,6 @@ class ListActivity : Activity(), ListContract.View {
         presenter.onSearchQueryChanged(searchBar.text.toString())
     }
 
-    // ── RecyclerView ──────────────────────────────────────────────────────────
 
     private fun setupRecyclerView() {
         adapter = StockAdapter(
@@ -68,7 +67,6 @@ class ListActivity : Activity(), ListContract.View {
         recyclerView.adapter = adapter
     }
 
-    // ── Search ────────────────────────────────────────────────────────────────
 
     private fun setupSearchBar() {
         searchBar.addTextChangedListener(object : TextWatcher {
@@ -80,7 +78,6 @@ class ListActivity : Activity(), ListContract.View {
         })
     }
 
-    // ── Sort spinner ──────────────────────────────────────────────────────────
 
     private fun setupSortSpinner() {
         val sortOptions = arrayOf(
@@ -108,7 +105,6 @@ class ListActivity : Activity(), ListContract.View {
         }
     }
 
-    // ── ListContract.View ─────────────────────────────────────────────────────
 
     override fun displayItems(items: List<StockModel>) {
         adapter.updateData(items)

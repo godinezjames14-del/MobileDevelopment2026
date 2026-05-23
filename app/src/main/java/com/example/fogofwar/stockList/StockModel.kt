@@ -4,8 +4,8 @@ data class StockModel(
     val symbol: String,
     val name: String,
     val price: Double = 0.0,
-    val change: Double = 0.0,        // e.g. +1.23
-    val changePercent: Double = 0.0  // e.g. +2.45 (%)
+    val change: Double = 0.0,
+    val changePercent: Double = 0.0
 ) {
     val isPositive: Boolean get() = change >= 0
     val formattedPrice: String get() = "$${"%.2f".format(price)}"

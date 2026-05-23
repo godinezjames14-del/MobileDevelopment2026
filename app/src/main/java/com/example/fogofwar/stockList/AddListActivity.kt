@@ -14,15 +14,15 @@ class AddListActivity : Activity() {
         super.onCreate(bundle)
         setContentView(R.layout.activity_addlist)
 
-        val app       = application as CustomApp
-        val etSymbol  = findViewById<EditText>(R.id.editStockSymbol)
-        val etName    = findViewById<EditText>(R.id.editStockName)
-        val btnSave   = findViewById<Button>(R.id.btnSave)
-        val btnBack   = findViewById<Button>(R.id.btnBack)
+        val app = application as CustomApp
+        val edittextStockSymbol = findViewById<EditText>(R.id.edittextStockSymbol)
+        val edittextStockName = findViewById<EditText>(R.id.edittextStockName)
+        val btnSave = findViewById<Button>(R.id.buttonSave)
+        val btnBack = findViewById<Button>(R.id.buttonBack)
 
         btnSave.setOnClickListener {
-            val symbol = etSymbol.text.toString().trim().uppercase()
-            val name   = etName.text.toString().trim()
+            val symbol = edittextStockSymbol.text.toString().trim().uppercase()
+            val name   = edittextStockName.text.toString().trim()
 
             when {
                 symbol.isEmpty() -> showToast("Please enter a ticker symbol (e.g. AAPL)")
