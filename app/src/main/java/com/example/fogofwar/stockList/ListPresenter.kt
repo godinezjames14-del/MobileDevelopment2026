@@ -8,11 +8,10 @@ class ListPresenter(
 ) : ListContract.Presenter {
 
     private var currentSort = StockAdapter.SortMode.NAME_ASC
+    private var currentQuery = ""
 
     override fun loadItems() {
-        val stocks = app.stockList.map { parseStockEntry(it) }
-        view.displayItems(stocks)
-        view.showEmptyState(stocks.isEmpty())
+        updateView()
     }
 
     override fun onAddItemClicked() {
@@ -24,19 +23,40 @@ class ListPresenter(
     }
 
     override fun onSearchQueryChanged(query: String) {
-        // Delegated to adapter via view; presenter notifies so view can pass to adapter
-        val stocks = app.stockList.map { parseStockEntry(it) }
-            .filter {
-                it.symbol.contains(query, ignoreCase = true) ||
-                it.name.contains(query, ignoreCase = true)
-            }
-        view.displayItems(stocks)
-        view.showEmptyState(stocks.isEmpty())
+        currentQuery = query
+        updateView()
     }
 
     override fun onSortChanged(mode: StockAdapter.SortMode) {
         currentSort = mode
-        loadItems()
+        updateView()
+    }
+
+    private fun updateView() {
+        val allStocks = app.stockList.map { parseStockEntry(it) }
+        
+        // 1. Filter
+        val filtered = if (currentQuery.isBlank()) {
+            allStocks
+        } else {
+            allStocks.filter {
+                it.symbol.contains(currentQuery, ignoreCase = true) ||
+                it.name.contains(currentQuery, ignoreCase = true)
+            }
+        }
+
+        // 2. Sort
+        val sorted = when (currentSort) {
+            StockAdapter.SortMode.NAME_ASC  -> filtered.sortedBy { it.name }
+            StockAdapter.SortMode.NAME_DESC -> filtered.sortedByDescending { it.name }
+            StockAdapter.SortMode.PRICE_ASC  -> filtered.sortedBy { it.price }
+            StockAdapter.SortMode.PRICE_DESC -> filtered.sortedByDescending { it.price }
+            StockAdapter.SortMode.CHANGE_ASC  -> filtered.sortedBy { it.changePercent }
+            StockAdapter.SortMode.CHANGE_DESC -> filtered.sortedByDescending { it.changePercent }
+        }
+
+        view.displayItems(sorted)
+        view.showEmptyState(sorted.isEmpty())
     }
 
     override fun onItemClicked(stock: StockModel) {
@@ -54,14 +74,10 @@ class ListPresenter(
         app.stockList.removeIf {
             it.startsWith(stock.symbol) || it == stock.name
         }
-        loadItems()
+        app.refreshParsedStocks()
+        updateView()
     }
 
-    /**
-     * Parse stored string into a StockModel.
-     * Stored format: "SYMBOL|Full Name" OR legacy "Full Name (SYMBOL)"
-     * Simulated price/change data — swap in a real API call here.
-     */
     private fun parseStockEntry(entry: String): StockModel {
         return if (entry.contains("|")) {
             val parts = entry.split("|")
@@ -75,7 +91,6 @@ class ListPresenter(
                 changePercent = simulatedChangePct(symbol)
             )
         } else {
-            // Legacy format: "Bitcoin (BTC)"
             val regex = Regex("^(.+?)\\s*\\(([^)]+)\\)$")
             val match = regex.find(entry.trim())
             val name = match?.groupValues?.get(1)?.trim() ?: entry
@@ -90,7 +105,6 @@ class ListPresenter(
         }
     }
 
-    // Deterministic simulated data based on symbol hash — replace with real API
     private fun simulatedPrice(symbol: String): Double {
         val seed = symbol.hashCode().toLong()
         return 10.0 + (Math.abs(seed) % 99000) / 100.0

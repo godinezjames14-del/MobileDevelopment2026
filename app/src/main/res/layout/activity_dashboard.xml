@@ -1,82 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#FDFBF7"
-    android:padding="24dp">
+    android:background="#FDFBF7">
 
-    <TextView
-        android:id="@+id/textviewUser"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome back, User"
-        android:textColor="#8B0000"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="24dp" />
+        android:orientation="vertical"
+        android:padding="24dp">
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="2dp"
-        app:strokeColor="#B8860B"
-        app:strokeWidth="1dp">
-
+        <!-- Welcome -->
         <TextView
-            android:id="@+id/textviewStockData"
+            android:id="@+id/textviewUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="Market Overview: Loading..."
-            android:textColor="#333333"
-            android:textSize="16sp" />
-    </com.google.android.material.card.MaterialCardView>
+            android:text="Welcome back, User"
+            android:textColor="#8B0000"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="2dp"
-        app:cardBackgroundColor="#F8F0E5"
-        app:strokeColor="#4CAF50"
-        app:strokeWidth="1dp">
-
-        <TextView
-            android:id="@+id/textviewAIPreview"
+        <!-- Top 3 Stocks Card -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="AI Insight: Market appears stable today."
-            android:textColor="#2E7D32"
-            android:textSize="14sp"
-            android:textStyle="italic" />
-    </com.google.android.material.card.MaterialCardView>
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="3dp"
+            app:strokeColor="#B8860B"
+            app:strokeWidth="1dp">
 
-    <Button
-        android:id="@+id/buttonViewList"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:backgroundTint="#8B0000"
-        android:text="VIEW STOCK LIST"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-    <Button
-        android:id="@+id/buttonLogout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="#FDFBF7"
-        android:text="Logout"
-        android:textColor="#8B0000"
-        app:strokeColor="#8B0000"
-        app:strokeWidth="1dp"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🏆  Top Performing Stocks"
+                    android:textColor="#8B0000"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
 
-</LinearLayout>
+                <!-- Populated at runtime by DashboardActivity.displayTopStocks() -->
+                <LinearLayout
+                    android:id="@+id/topStocksContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Market Overview Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:strokeColor="#B8860B"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📊  Market Overview"
+                    android:textColor="#8B0000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:id="@+id/textviewStockData"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Market Overview: Loading..."
+                    android:textColor="#333333"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- AI Insight Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="#F8F0E5"
+            app:strokeColor="#4CAF50"
+            app:strokeWidth="1dp">
+
+            <TextView
+                android:id="@+id/textviewAIPreview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="AI Insight: Market appears stable today."
+                android:textColor="#2E7D32"
+                android:textSize="14sp"
+                android:textStyle="italic" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- View Stock List Button -->
+        <Button
+            android:id="@+id/buttonViewList"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:backgroundTint="#8B0000"
+            android:text="VIEW STOCK LIST"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- Logout Button -->
+        <Button
+            android:id="@+id/buttonLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="#FDFBF7"
+            android:text="Logout"
+            android:textColor="#8B0000"
+            app:strokeColor="#8B0000"
+            app:strokeWidth="1dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+    </LinearLayout>
+</ScrollView>

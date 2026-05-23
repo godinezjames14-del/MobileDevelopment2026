@@ -1,31 +1,38 @@
 package com.example.fogofwar.dashboard
 
-import com.example.fogofwar.app.CustomApp
-
 class DashboardPresenter(
     private var view: DashboardContract.View?,
-    val app: CustomApp
+    private val model: DashboardContract.Model
 ) : DashboardContract.Presenter {
 
-
     override fun loadMarketData() {
-        val stockUpdate = "BTC: $64,000 (+2.5%)\nAAPL: $185.00 (-0.4%)"
-        val aiInsight = "AI Signal: Market is bullish. Consider holding."
+        model.refreshStocks()
+        val stocks = model.getStocks()
+
+        val stockUpdate = if (stocks.isNotEmpty()) {
+            model.formatMarketOverview(stocks)
+        } else {
+            "No stocks available."
+        }
+
+        val topStocks = model.sortTopStocks(stocks)
+        
+        val aiInsight = if (topStocks.isNotEmpty()) {
+            model.generateAIInsight(topStocks.first())
+        } else {
+            model.generateAIInsight(null)
+        }
 
         view?.displayStockData(stockUpdate)
         view?.showAIPrediction(aiInsight)
+        view?.displayTopStocks(topStocks)
     }
 
     override fun loadUser() {
-        val displayName = app.currentUser
-        view?.displayWelcomeMessage(displayName)
+        view?.displayWelcomeMessage(model.getCurrentUserName())
     }
 
     override fun onRefreshClicked() {
         loadMarketData()
     }
-
-
-
-
 }
