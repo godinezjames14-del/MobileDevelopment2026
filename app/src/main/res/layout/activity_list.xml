@@ -1,35 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#FDFBF7"
-    android:padding="24dp">
+    android:background="@color/bg_main">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!--  ── Header ──  -->
+    <LinearLayout
+        android:id="@+id/llHeader"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Market Watchlist"
-        android:textColor="#8B0000"
-        android:textSize="22sp"
-        android:layout_marginBottom="16dp"
-        android:textStyle="bold" />
 
-    <ListView
-        android:id="@+id/stockListView"
-        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@color/bg_main"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="16dp"
+        android:elevation="4dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Market Watchlist"
+            android:textColor="@color/text_accent"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.02"
+            android:fontFamily="sans-serif-medium"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Track your assets"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            android:layout_marginTop="2dp"/>
+    </LinearLayout>
+
+    <!--  ── Search bar ──  -->
+    <LinearLayout
+        android:id="@+id/llSearch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="6dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/llHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <EditText
+            android:id="@+id/searchBar"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_search_bar"
+            android:hint="Search symbol or name…"
+            android:textColorHint="@color/text_secondary"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:inputType="text"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"/>
+
+        <Spinner
+            android:id="@+id/spinnerSort"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/bg_spinner"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:popupBackground="@color/white"/>
+    </LinearLayout>
+
+    <!--  ── RecyclerView ──  -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/stockRecyclerView"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:divider="#B8860B"
-        android:dividerHeight="1dp" />
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toBottomOf="@id/llSearch"
+        app:layout_constraintBottom_toTopOf="@id/llBottomAction"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <Button
-        android:id="@+id/btnAddAsset"
-        android:layout_width="match_parent"
+    <!--  ── Empty state ──  -->
+    <TextView
+        android:id="@+id/tvEmptyState"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="No assets yet.\nTap + Add New Asset to get started."
+        android:textAlignment="center"
+        android:textColor="@color/text_secondary"
+        android:textSize="15sp"
+        android:lineSpacingMultiplier="1.5"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/llSearch"
+        app:layout_constraintBottom_toTopOf="@id/llBottomAction"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/llBottomAction"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#8B0000"
-        android:text="Add New Asset"
-        android:textColor="#FFFFFF" />
+        android:background="@color/bg_main"
+        android:padding="16dp"
+        android:elevation="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Long-press any item in the watchlist to remove it (admin only)."
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:layout_marginBottom="12dp"
+            android:lineSpacingMultiplier="1.2"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"/>
+
+        <Button
+            android:id="@+id/btnAddAsset"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:backgroundTint="@color/accent_red"
+            android:text="＋ Add New Asset"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.04"
+            android:stateListAnimator="@null"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

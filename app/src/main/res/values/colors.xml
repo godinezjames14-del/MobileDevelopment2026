@@ -2,4 +2,15 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!--  App palette (Bright Theme)  -->
+    <color name="bg_main">#FDFBF7</color>
+    <color name="bg_secondary">#F8F0E5</color>
+    <color name="accent_red">#8B0000</color>
+    <color name="accent_gold">#B8860B</color>
+    <color name="text_primary">#333333</color>
+    <color name="text_secondary">#666666</color>
+    <color name="text_accent">#8B0000</color>
+    <!--  Stock change colors  -->
+    <color name="stock_green">#4CAF50</color>
+    <color name="stock_red">#EF5350</color>
 </resources>

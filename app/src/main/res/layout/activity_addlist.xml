@@ -1,53 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#FDFBF7"
-    android:padding="24dp">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add New Asset"
-        android:textColor="#8B0000"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="32dp" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/FogOfWarInputStyle"
-        android:hint="Asset Symbol (e.g. AAPL)">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editStockName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textCapCharacters" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="#8B0000"
-        android:text="SAVE TO WATCHLIST"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="#FDFBF7"
-        android:text="CANCEL"
-        android:textColor="#8B0000"
-        app:strokeColor="#8B0000"
-        app:strokeWidth="1dp"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="@color/bg_main">
+    <!--  ── Header ──  -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/bg_main" android:paddingStart="20dp" android:paddingEnd="20dp" android:paddingTop="20dp" android:paddingBottom="16dp" android:elevation="4dp">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Add Asset" android:textColor="@color/text_accent" android:textSize="24sp" android:textStyle="bold" android:fontFamily="sans-serif-medium"/>
+    </LinearLayout>
+    <!--  ── Form ──  -->
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:fillViewport="true">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="24dp">
+            <!--  Ticker Symbol  -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="TICKER SYMBOL" android:textColor="@color/text_secondary" android:textSize="11sp" android:letterSpacing="0.1" android:layout_marginBottom="6dp"/>
+            <com.google.android.material.textfield.TextInputLayout style="@style/FogOfWarInputStyle" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="e.g. AAPL, BTC, ETH" app:boxBackgroundColor="@color/white">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/editStockSymbol" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textCapCharacters" android:maxLength="10" android:textColor="@color/text_primary"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--  Asset Name  -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ASSET NAME" android:textColor="@color/text_secondary" android:textSize="11sp" android:letterSpacing="0.1" android:layout_marginTop="20dp" android:layout_marginBottom="6dp"/>
+            <com.google.android.material.textfield.TextInputLayout style="@style/FogOfWarInputStyle" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="e.g. Apple Inc., Bitcoin" app:boxBackgroundColor="@color/white">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/editStockName" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textCapSentences" android:textColor="@color/text_primary"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--  Hint text  -->
+        </LinearLayout>
+    </ScrollView>
+    <!--  ── Action buttons ──  -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@color/bg_main" android:padding="16dp" android:elevation="8dp">
+        <Button android:id="@+id/btnSave" android:layout_width="match_parent" android:layout_height="52dp" android:backgroundTint="@color/accent_red" android:text="SAVE TO WATCHLIST" android:textColor="#FFFFFF" android:textSize="15sp" android:textStyle="bold" android:letterSpacing="0.05" android:stateListAnimator="@null"/>
+        <Button android:id="@+id/btnBack" android:layout_width="match_parent" android:layout_height="52dp" android:layout_marginTop="10dp" android:backgroundTint="@color/bg_main" android:text="CANCEL" android:textColor="@color/text_secondary" android:textSize="15sp" android:textStyle="bold" android:letterSpacing="0.05" android:stateListAnimator="@null" app:strokeColor="@color/text_secondary" app:strokeWidth="1dp" style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+    </LinearLayout>
 </LinearLayout>
