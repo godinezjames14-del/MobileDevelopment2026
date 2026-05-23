@@ -16,8 +16,6 @@ class StockAdapter(
     private val onItemLongClick: (StockModel) -> Boolean
 ) : RecyclerView.Adapter<StockAdapter.StockViewHolder>() {
 
-    private var fullList: MutableList<StockModel> = items.toMutableList()
-
     inner class StockViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvSymbol: TextView = view.findViewById(R.id.tvSymbol)
         val tvName: TextView = view.findViewById(R.id.tvName)
@@ -58,47 +56,9 @@ class StockAdapter(
 
     override fun getItemCount() = items.size
 
-    /** Filter list by query (symbol or name) */
-    fun filter(query: String) {
-        items = if (query.isBlank()) {
-            fullList.toMutableList()
-        } else {
-            fullList.filter {
-                it.symbol.contains(query, ignoreCase = true) ||
-                it.name.contains(query, ignoreCase = true)
-            }.toMutableList()
-        }
-        notifyDataSetChanged()
-    }
-
-    /** Sort by various criteria */
-    fun sortBy(mode: SortMode) {
-        items = when (mode) {
-            SortMode.NAME_ASC  -> items.sortedBy { it.name }.toMutableList()
-            SortMode.NAME_DESC -> items.sortedByDescending { it.name }.toMutableList()
-            SortMode.PRICE_ASC  -> items.sortedBy { it.price }.toMutableList()
-            SortMode.PRICE_DESC -> items.sortedByDescending { it.price }.toMutableList()
-            SortMode.CHANGE_ASC  -> items.sortedBy { it.changePercent }.toMutableList()
-            SortMode.CHANGE_DESC -> items.sortedByDescending { it.changePercent }.toMutableList()
-        }
-        notifyDataSetChanged()
-    }
-
-    /** Replace entire dataset (e.g. after a reload) */
     fun updateData(newItems: List<StockModel>) {
-        fullList = newItems.toMutableList()
-        items = fullList.toMutableList()
+        this.items = newItems.toMutableList()
         notifyDataSetChanged()
-    }
-
-    /** Remove a single item by symbol */
-    fun removeItem(stock: StockModel) {
-        val idx = items.indexOfFirst { it.symbol == stock.symbol }
-        if (idx >= 0) {
-            items.removeAt(idx)
-            notifyItemRemoved(idx)
-        }
-        fullList.removeIf { it.symbol == stock.symbol }
     }
 
     enum class SortMode {

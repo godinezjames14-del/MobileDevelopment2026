@@ -22,6 +22,7 @@ class ListActivity : Activity(), ListContract.View {
     private lateinit var tvEmptyState: TextView
     private lateinit var searchBar: EditText
     private lateinit var btnAddAsset: Button
+    private lateinit var llBottomAction: LinearLayout
     private lateinit var spinnerSort: Spinner
 
     override fun onCreate(bundle: Bundle?) {
@@ -32,6 +33,7 @@ class ListActivity : Activity(), ListContract.View {
         tvEmptyState  = findViewById(R.id.tvEmptyState)
         searchBar     = findViewById(R.id.searchBar)
         btnAddAsset   = findViewById(R.id.btnAddAsset)
+        llBottomAction = findViewById(R.id.llBottomAction)
         spinnerSort   = findViewById(R.id.spinnerSort)
 
         presenter = ListPresenter(this, application as CustomApp)
@@ -50,7 +52,7 @@ class ListActivity : Activity(), ListContract.View {
 
     override fun onResume() {
         super.onResume()
-        presenter.loadItems()
+        presenter.onSearchQueryChanged(searchBar.text.toString())
     }
 
     // ── RecyclerView ──────────────────────────────────────────────────────────
@@ -71,10 +73,10 @@ class ListActivity : Activity(), ListContract.View {
     private fun setupSearchBar() {
         searchBar.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
                 presenter.onSearchQueryChanged(s?.toString() ?: "")
             }
-            override fun afterTextChanged(s: Editable?) {}
         })
     }
 
@@ -117,12 +119,23 @@ class ListActivity : Activity(), ListContract.View {
     }
 
     override fun configureButton(flag: Boolean) {
-        btnAddAsset.setVisibility(flag)
+        llBottomAction.setVisibility(flag)
     }
 
     override fun showEmptyState(show: Boolean) {
-        tvEmptyState.visibility = if (show) View.VISIBLE else View.GONE
-        recyclerView.visibility = if (show) View.GONE else View.VISIBLE
+        if (show) {
+            val app = application as CustomApp
+            if (app.isAdmin) {
+                tvEmptyState.text = "No assets yet.\nTap + Add New Asset to get started."
+            } else {
+                tvEmptyState.text = "No assets currently available in the watchlist."
+            }
+            tvEmptyState.visibility = View.VISIBLE
+            recyclerView.visibility = View.GONE
+        } else {
+            tvEmptyState.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
+        }
     }
 
     override fun showStockDetail(stock: StockModel) {
